@@ -12,19 +12,10 @@ defmodule RomanNumerals do
         end
         
         if value > 0 do
-            ListOperations.fold(mapping, accumulator, evaluateNumeral)
+            List.foldr(mapping, accumulator, evaluateNumeral)
         else
             accumulator
         end
-    end
-end
-
-defmodule ListOperations do
-    def fold([head|tail], accumulator, f) do
-        fold(tail, f.(head, accumulator), f)
-    end
-    def fold([], accumulator, f) do
-        accumulator
     end
 end
 
