@@ -1,18 +1,11 @@
 defmodule FizzBuzz do
-  def output(number) when rem(number, 3) == 0 and rem(number, 5) == 0 do
-    "FizzBuzz"
-  end
-
-  def output(number) when rem(number, 3) == 0 do
-    "Fizz"
-  end
-  
-  def output(number) when rem(number, 5) == 0 do
-    "Buzz"
-  end
-  
   def output(number) do
-    number
+    case {rem(number, 3), rem(number, 5)} do
+      {0,0} -> "FizzBuzz"
+      {0,_} -> "Fizz"
+      {_,0} -> "Buzz"
+      _ -> number
+    end
   end
 end
 
