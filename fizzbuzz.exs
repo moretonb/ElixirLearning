@@ -8,17 +8,36 @@ defmodule FizzBuzz do
     end
   end
   
-  def popify(number) do
-    case {rem(number, 3), rem(number, 5), rem(number, 7)} do
-      {0,0,0} -> "FizzBuzzPop"
-      {0,0,_} -> "FizzBuzz"
-      {0,_,0} -> "FizzPop"
-      {_,0,0} -> "BuzzPop"
-      {0,_,_} -> "Fizz"
-      {_,0,_} -> "Buzz"
-      {_,_,0} -> "Pop"
-      _ -> number
+  def popify(number) do   
+    match = match_3(number) <> match_5(number) <> match_7(number)
+    case match do
+      "" -> number
+      _ -> match
     end
+  end
+  
+  def match_3(number) when rem(number, 3) == 0 do
+    "Fizz"
+  end
+  
+  def match_3(_) do
+    ""
+  end
+  
+  def match_5(number) when rem(number, 5) == 0 do
+    "Buzz"
+  end
+  
+  def match_5(_) do
+    ""
+  end
+  
+  def match_7(number) when rem(number, 7) == 0 do
+    "Pop"
+  end
+  
+  def match_7(_) do
+    ""
   end
 end
 
