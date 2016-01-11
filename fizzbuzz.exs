@@ -39,6 +39,13 @@ defmodule FizzBuzz do
   def match_7(_) do
     ""
   end
+  
+  def custom(number, factor, substitution) do
+    case rem(number, factor) do
+      0 -> substitution
+      _ -> number
+    end
+  end
 end
 
 Enum.each 1..100, fn number ->
@@ -47,4 +54,8 @@ end
 
 Enum.each 1..100, fn number ->
   IO.puts FizzBuzz.popify number
+end
+
+Enum.each 1..100, fn number ->
+  IO.puts FizzBuzz.custom number, 2, "Fizz"
 end
