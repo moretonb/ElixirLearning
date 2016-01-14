@@ -1,22 +1,10 @@
 defmodule FizzBuzz do  
-  def substitute(number, {factor, substitution}) do
-    case rem(number, factor) do
-      0 -> substitution
-      _ -> ""
-    end
-  end
+  def substitute(0, substitution), do: substitution
+  def substitute(_, _), do: ""
   
-  def custom(number, [head|tail], accumulator) do
-    custom(number, tail, accumulator <> substitute(number, head))
-  end
-  
-  def custom(number, [], accumulator) when accumulator == "" do
-    number
-  end
-  
-  def custom(number, [], accumulator) do
-    accumulator
-  end
+  def custom(number, [{factor, substitution}|tail], accumulator), do: custom(number, tail, accumulator <> substitute(rem(number, factor), substitution))  
+  def custom(number, [], ""), do: number  
+  def custom(_, [], accumulator), do: accumulator
 end
 
 Enum.each 1..100, fn number ->
