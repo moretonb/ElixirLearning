@@ -2,7 +2,13 @@ defmodule FizzBuzz do
   def substitute(0, substitution), do: substitution
   def substitute(_, _), do: ""
   
-  def custom(number, [{factor, substitution}|tail], accumulator), do: custom(number, tail, accumulator <> substitute(rem(number, factor), substitution))  
+  def custom(number, [{factor, substitution}|tail], accumulator) do
+    sub = substitute(rem(number, factor), substitution)
+    new_accumulator = accumulator <> sub
+    
+    custom(number, tail, new_accumulator)
+  end
+    
   def custom(number, [], ""), do: number  
   def custom(_, [], accumulator), do: accumulator
 end
