@@ -18,24 +18,24 @@ end
 defmodule Chop do
   def guess(number, range), do: output(number, range, false)
 
-  def output(number, _, true), do: IO.puts number
+  defp output(number, _, true), do: IO.puts number
   
-  def output(number, range, _) do
+  defp output(number, range, _) do
     {our_guess, new_range, success} = make_guess_with_range(range, number)
     
     IO.puts "Is it #{our_guess}"
     output(number, new_range, success)
   end
   
-  def make_guess_with_range(lower..upper, number) do
+  defp make_guess_with_range(lower..upper, number) do
     midpoint = div(upper - lower, 2) + lower
     
     {midpoint, calculate_new_range(lower, upper, midpoint, number), midpoint == number}
   end
   
-  def calculate_new_range(lower, _, midpoint, number) when midpoint > number do
+  defp calculate_new_range(lower, _, midpoint, number) when midpoint > number do
      lower..(midpoint - 1)
   end
   
-  def calculate_new_range(_, upper, midpoint, _), do: (midpoint + 1)..upper
+  defp calculate_new_range(_, upper, midpoint, _), do: (midpoint + 1)..upper
 end
