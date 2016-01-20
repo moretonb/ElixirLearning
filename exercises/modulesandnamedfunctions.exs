@@ -16,26 +16,30 @@ end
 
 #ModulesAndFunctions-6
 defmodule Chop do
-  def guess(number, range), do: output(number, range, false)
-
-  defp output(number, _, true), do: IO.puts number
+  def guess(number, range), do: make_guess({nil, range}, number)
   
-  defp output(number, range, _) do
-    {our_guess, new_range, success} = make_guess_with_range(range, number)
-    
-    IO.puts "Is it #{our_guess}"
-    output(number, new_range, success)
+  defp make_guess({guess, _}, number) when guess == number do
+    IO.puts guess
   end
   
-  defp make_guess_with_range(lower..upper, number) do
-    midpoint = div(upper - lower, 2) + lower
-    
-    {midpoint, calculate_new_range(lower, upper, midpoint, number), midpoint == number}
+  defp make_guess({_, range}, number) do
+    range
+    |> calculate_midpoint
+    |> calculate_new_range(range, number)
+    |> print_guess_to_console
+    |> make_guess(number)
   end
   
-  defp calculate_new_range(lower, _, midpoint, number) when midpoint > number do
-     lower..(midpoint - 1)
+  defp calculate_midpoint(lower..upper), do: div(upper - lower, 2) + lower
+  
+  defp calculate_new_range(midpoint, lower.._, number) when midpoint > number do
+     {midpoint, lower..(midpoint - 1)}
   end
   
-  defp calculate_new_range(_, upper, midpoint, _), do: (midpoint + 1)..upper
+  defp calculate_new_range(midpoint, _..upper, _), do: {midpoint, (midpoint + 1)..upper}
+  
+  defp print_guess_to_console({guess, range}) do
+    IO.puts "Is it #{guess}"
+    {guess, range}
+  end
 end

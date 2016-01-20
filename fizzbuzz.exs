@@ -1,6 +1,6 @@
 defmodule FizzBuzz do  
-  def substitute(0, substitution), do: substitution
-  def substitute(_, _), do: ""
+  defp substitute(0, substitution), do: substitution
+  defp substitute(_, _), do: ""
 
   def custom(number, [{factor, custom_substitution}|tail], accumulator) do
     custom(number, tail, accumulator <> substitute(rem(number, factor), custom_substitution))
