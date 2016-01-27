@@ -43,3 +43,13 @@ defmodule Chop do
     {guess, range}
   end
 end
+
+#ModulesAndFunctions-7
+defmodule Libraries do
+  def to_money_string(value), do: :io.fwrite("~.2f~n", value)  
+  def get_environment_variable(name), do: IO.puts System.get_env(name)
+  def get_extension(path), do: IO.puts Path.extname(path)
+  def get_current_directory(), do: IO.puts System.cwd()
+  #https://github.com/devinus/poison
+  def execute_shell_command(command), do: :os.cmd(command)
+end
