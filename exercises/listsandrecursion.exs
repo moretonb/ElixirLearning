@@ -21,8 +21,10 @@ defmodule ListOperations do
   #ListsAndRecursion-3
   def caesar([], _), do: ''
   def caesar([head|tail], increment) do
+    wrapAroundALphabet = &(&1 - (?z - (?a -1)))
+  
     case head + increment do
-      value when value > ?z -> [value - (?z - (?a - 1))|caesar(tail, increment)]
+      value when value > ?z -> [wrapAroundALphabet.(value)|caesar(tail, increment)]
       value -> [value|caesar(tail, increment)]
     end
   end
